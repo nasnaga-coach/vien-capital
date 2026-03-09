@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vien.capital — Under Development</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+        url('backgroung.jpg') center center / cover no-repeat;
+      color: #ffffff;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .overlay {
+      width: 100%;
+      max-width: 760px;
+      padding: 40px 28px;
+      background: rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 18px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .logo {
+      font-size: 14px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      line-height: 1.6;
+      opacity: 0.95;
+    }
+
+    .email {
+      margin-top: 24px;
+      display: inline-block;
+      font-size: 1rem;
+      color: #ffffff;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      padding: 12px 18px;
+      border-radius: 999px;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .email:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.8);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 600px) {
+      .overlay {
+        padding: 32px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="overlay">
+    <div class="logo">vien.capital</div>
+    <h1>Website Under Development</h1>
+    <p>
+      We are currently working on our new website.<br />
+      Please check back soon.
+    </p>
+    <a class="email" href="mailto:info@vien.capital">info@vien.capital</a>
+  </main>
+</body>
+</html>
+
