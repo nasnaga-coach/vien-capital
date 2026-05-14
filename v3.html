@@ -1098,69 +1098,7 @@
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X01JVD2LYK"></script>
 <script>
-  // ── Analytics ──
   function gtrack(n,p){if(typeof gtag==='function')gtag('event',n,p);}
-
-  // ── Scroll progress ──
-  var progressEl=document.getElementById('scroll-progress');
-  function updateProgress(){var h=document.documentElement,b=document.body,st=h.scrollTop||b.scrollTop,sh=(h.scrollHeight||b.scrollHeight)-h.clientHeight;if(progressEl)progressEl.style.width=(sh>0?(st/sh)*100:0)+'%';}
-  document.addEventListener('scroll',updateProgress,{passive:true});
-  updateProgress();
-
-  // ── Reveal on scroll ──
-  var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-
-  // ── Nav scrolled state ──
-  var nav=document.getElementById('nav');
-  function onScroll(){if(window.scrollY>30){nav.style.background='rgba(246,241,228,0.92)';nav.style.borderBottomColor='rgba(31,27,22,0.1)';}else{nav.style.background='rgba(246,241,228,0.78)';nav.style.borderBottomColor='rgba(31,27,22,0.06)';}}
-  document.addEventListener('scroll',onScroll,{passive:true});
-  onScroll();
-
-  // ── Mobile nav ──
-  var burger=document.querySelector('.nav-burger'),mobileMenu=document.querySelector('.nav-mobile');
-  if(burger&&mobileMenu){
-    burger.addEventListener('click',function(){var open=mobileMenu.classList.toggle('is-open');burger.classList.toggle('is-open',open);document.body.style.overflow=open?'hidden':'';});
-    mobileMenu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mobileMenu.classList.remove('is-open');burger.classList.remove('is-open');document.body.style.overflow='';});});
-  }
-
-  // ── CTA / link tracking ──
-  var navCta=document.querySelector('.nav-cta');
-  if(navCta)navCta.addEventListener('click',function(){gtrack('cta_click',{label:'nav'});});
-  document.querySelectorAll('.hero .btn-primary,.hero-cta-primary').forEach(function(el){el.addEventListener('click',function(){gtrack('cta_click',{label:'hero'});});});
-  var emailLink=document.querySelector('a[href^="mailto:"]');
-  if(emailLink)emailLink.addEventListener('click',function(){gtrack('contact_click',{method:'email'});});
-  var liVol=document.getElementById('contact-li-vol');
-  if(liVol)liVol.addEventListener('click',function(){gtrack('founder_linkedin_click',{founder:'volodymyr'});});
-  var liNat=document.getElementById('contact-li-nat');
-  if(liNat)liNat.addEventListener('click',function(){gtrack('founder_linkedin_click',{founder:'natalia'});});
-
-  // ── Contact form ──
-  var form=document.getElementById('vc-contact-form'),statusEl=document.getElementById('vc-form-status'),submitBtn=document.getElementById('vc-submit-btn');
-  if(form&&statusEl&&submitBtn){
-    function setStatus(t,c){statusEl.textContent=t;statusEl.style.color=c;statusEl.style.display='block';}
-    form.addEventListener('submit',async function(e){
-      e.preventDefault();
-      var fd=new FormData(form);
-      var payload={name:String(fd.get('name')||'').trim(),email:String(fd.get('email')||'').trim(),company:String(fd.get('company')||'').trim(),role:String(fd.get('role')||'').trim(),message:String(fd.get('message')||'').trim(),turnstileToken:String(fd.get('cf-turnstile-response')||'').trim()};
-      if(!payload.email){setStatus('Please enter your email address.','#9B4422');return;}
-      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)){setStatus('Please enter a valid email address.','#9B4422');return;}
-      if(!payload.turnstileToken){setStatus('Please confirm you are not a robot.','#9B4422');return;}
-      submitBtn.disabled=true;submitBtn.style.opacity='0.65';
-      setStatus('Sending…','#9C9646');
-      try{
-        var res=await fetch('https://api.vona.in.ua/api/contact-vien',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-        var result=await res.json().catch(function(){return{};});
-        if(!res.ok||!result.ok)throw new Error(result.error||'Something went wrong.');
-        form.reset();if(window.turnstile)window.turnstile.reset();
-        setStatus('Thank you — we will be in touch shortly.','#2E7D32');
-        gtrack('form_submit',{status:'success',form_id:'vc_contact'});
-      }catch(err){
-        setStatus(err.message||'Something went wrong. Please try again.','#9B4422');
-        gtrack('form_submit',{status:'error',form_id:'vc_contact'});
-      }finally{submitBtn.disabled=false;submitBtn.style.opacity='1';}
-    });
-  }
 </script>
 <!-- Cloudflare Turnstile -->
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -1765,7 +1703,7 @@
     var st = h.scrollTop || b.scrollTop;
     var sh = (h.scrollHeight || b.scrollHeight) - h.clientHeight;
     var p = sh > 0 ? (st / sh) * 100 : 0;
-    progressEl.style.width = p + '%';
+    if(progressEl) progressEl.style.width = p + '%';
   }
   document.addEventListener('scroll', updateProgress, { passive: true });
   updateProgress();
@@ -1794,6 +1732,51 @@
   }
   document.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  // ── Mobile nav ──
+  var burger=document.querySelector('.nav-burger'),mobileMenu=document.querySelector('.nav-mobile');
+  if(burger&&mobileMenu){
+    burger.addEventListener('click',function(){var open=mobileMenu.classList.toggle('is-open');burger.classList.toggle('is-open',open);document.body.style.overflow=open?'hidden':'';});
+    mobileMenu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mobileMenu.classList.remove('is-open');burger.classList.remove('is-open');document.body.style.overflow='';});});
+  }
+
+  // ── CTA / link tracking ──
+  var navCta=document.querySelector('.nav-cta');
+  if(navCta)navCta.addEventListener('click',function(){gtrack('cta_click',{label:'nav'});});
+  document.querySelectorAll('.hero .btn-primary,.hero-cta-primary').forEach(function(el){el.addEventListener('click',function(){gtrack('cta_click',{label:'hero'});});});
+  var emailLink=document.querySelector('a[href^="mailto:"]');
+  if(emailLink)emailLink.addEventListener('click',function(){gtrack('contact_click',{method:'email'});});
+  var liVol=document.getElementById('contact-li-vol');
+  if(liVol)liVol.addEventListener('click',function(){gtrack('founder_linkedin_click',{founder:'volodymyr'});});
+  var liNat=document.getElementById('contact-li-nat');
+  if(liNat)liNat.addEventListener('click',function(){gtrack('founder_linkedin_click',{founder:'natalia'});});
+
+  // ── Contact form ──
+  var form=document.getElementById('vc-contact-form'),statusEl=document.getElementById('vc-form-status'),submitBtn=document.getElementById('vc-submit-btn');
+  if(form&&statusEl&&submitBtn){
+    function setStatus(t,c){statusEl.textContent=t;statusEl.style.color=c;statusEl.style.display='block';}
+    form.addEventListener('submit',async function(e){
+      e.preventDefault();
+      var fd=new FormData(form);
+      var payload={name:String(fd.get('name')||'').trim(),email:String(fd.get('email')||'').trim(),company:String(fd.get('company')||'').trim(),role:String(fd.get('role')||'').trim(),message:String(fd.get('message')||'').trim(),turnstileToken:String(fd.get('cf-turnstile-response')||'').trim()};
+      if(!payload.email){setStatus('Please enter your email address.','#9B4422');return;}
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)){setStatus('Please enter a valid email address.','#9B4422');return;}
+      if(!payload.turnstileToken){setStatus('Please confirm you are not a robot.','#9B4422');return;}
+      submitBtn.disabled=true;submitBtn.style.opacity='0.65';
+      setStatus('Sending…','#9C9646');
+      try{
+        var res=await fetch('https://api.vona.in.ua/api/contact-vien',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+        var result=await res.json().catch(function(){return{};});
+        if(!res.ok||!result.ok)throw new Error(result.error||'Something went wrong.');
+        form.reset();if(window.turnstile)window.turnstile.reset();
+        setStatus('Thank you — we will be in touch shortly.','#2E7D32');
+        gtrack('form_submit',{status:'success',form_id:'vc_contact'});
+      }catch(err){
+        setStatus(err.message||'Something went wrong. Please try again.','#9B4422');
+        gtrack('form_submit',{status:'error',form_id:'vc_contact'});
+      }finally{submitBtn.disabled=false;submitBtn.style.opacity='1';}
+    });
+  }
 </script>
 
 
