@@ -70,7 +70,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 4px 32px;
+    padding: 12px 32px;
     max-width: 1240px;
     margin: 0 auto;
   }
@@ -84,7 +84,7 @@
   }
 
   .nav-mark {
-    height: 160px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -319,18 +319,18 @@
     z-index: 1;
   }
 
-  /* Title block — sits cleanly below photo */
+  /* Title block */
   .hero-title-overlay {
     position: relative;
     z-index: 3;
-    margin-top: 48px;
+    margin-top: 0;
     text-align: center;
     padding: 0 20px;
-    animation: fadeUp 1s 0.5s both ease-out;
+    animation: fadeUp 1s 0.35s both ease-out;
   }
 
   .hero-title-overlay .hero-title {
-    font-size: clamp(54px, 9vw, 132px);
+    font-size: clamp(38px, 4.6vw, 70px);
     line-height: 0.98;
     font-weight: 200;
     font-style: italic;
@@ -352,7 +352,7 @@
 
   /* tagline + CTAs sit cleanly below */
   .hero-meta {
-    margin-top: 56px;
+    margin-top: 40px;
     text-align: center;
     animation: fadeUp 1s 0.85s both ease-out;
   }
@@ -501,6 +501,47 @@
     }
   }
 
+  .hero-text {
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (min-width: 880px) {
+    .hero {
+      padding: 60px 0 80px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-photo-wrap {
+      max-width: none;
+      margin: 0;
+    }
+    .hero-photo {
+      aspect-ratio: 4 / 3;
+    }
+    .hero-title-overlay {
+      text-align: left;
+      margin-top: 0;
+      padding: 0;
+    }
+    .hero-meta {
+      text-align: left;
+      margin-top: 36px;
+    }
+    .hero-meta .hero-ctas {
+      justify-content: flex-start;
+    }
+    .hero-meta .hero-tagline {
+      margin-left: 0;
+      margin-right: 0;
+      max-width: 460px;
+    }
+  }
+
   .hero-eyebrow {
     display: inline-flex;
     align-items: center;
@@ -523,11 +564,11 @@
 
   .hero-title {
     font-weight: 200;
-    font-size: clamp(46px, 7.5vw, 96px);
-    line-height: 1.02;
+    font-size: clamp(38px, 4.6vw, 70px);
+    line-height: 1;
     letter-spacing: -0.035em;
     color: var(--ink);
-    margin-bottom: 32px;
+    margin-bottom: 0;
     animation: fadeUp 0.9s 0.25s both ease-out;
   }
 
@@ -538,11 +579,11 @@
   }
 
   .hero-tagline {
-    font-size: clamp(18px, 2vw, 22px);
-    line-height: 1.5;
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.6;
     color: var(--ink-soft);
     max-width: 620px;
-    margin-bottom: 48px;
+    margin-bottom: 36px;
     font-weight: 300;
     animation: fadeUp 0.9s 0.4s both ease-out;
   }
@@ -1322,31 +1363,34 @@
       <img src="images/logo.png" alt="" />
     </div>
     <div class="hero-grid">
-      
+
+      <div class="hero-text">
+        <p class="hero-eyebrow">VN Capital — Investment Partners</p>
+        <div class="hero-title-overlay">
+          <h1 class="hero-title">
+            More than<br>just <span class="accent">Investments</span>
+          </h1>
+        </div>
+        <div class="hero-meta">
+          <p class="hero-tagline">
+            Smart Money with hands-on support in growth, structuring, and reach into international capital
+          </p>
+          <div class="hero-ctas">
+            <a href="#contact" class="btn btn-primary">
+              Explore Partnership
+              <span class="btn-arrow">→</span>
+            </a>
+            <a href="#founders" class="btn btn-secondary">Meet the Team</a>
+          </div>
+        </div>
+      </div>
 
       <div class="hero-photo-wrap">
         <div class="hero-photo">
-          <img src="images/hero.jpg" alt="Volodymyr Nerubenko and Natalia Teriakhina, Founders of VN Capital" />
+          <img src="images/hero.png" alt="Volodymyr Nerubenko and Natalia Teriakhina, Founders of VN Capital" />
         </div>
       </div>
 
-      <div class="hero-title-overlay">
-        <h1 class="hero-title">
-          More than just<br><span class="accent">Investments</span>
-        </h1>
-      </div>
-
-      <div class="hero-meta">
-        <p class="hero-tagline">
-          Smart Money with hands-on support in growth, structuring, and reach into international capital
-        </p>
-        <div class="hero-ctas">
-          <a href="#contact" class="btn btn-primary">
-            Explore Partnership
-            <span class="btn-arrow">→</span>
-          </a>
-        </div>
-      </div>
     </div>
   </div>
 </header>
@@ -1383,7 +1427,7 @@
       <!-- VOLODYMYR -->
       <article class="founder">
         <div class="founder-portrait">
-          <img src="images/volodymyr.jpg" alt="Volodymyr Nerubenko" />
+          <img src="images/volodymyr.png" alt="Volodymyr Nerubenko" />
         </div>
         <h3 class="founder-name">Volodymyr Nerubenko</h3>
         <p class="founder-subtitle">Serial entrepreneur, investor, and strategic advisor</p>
@@ -1430,7 +1474,7 @@
       <!-- NATALIA -->
       <article class="founder">
         <div class="founder-portrait">
-          <img src="images/natalia.jpg" alt="Natalia Teriakhina" />
+          <img src="images/natalia.png" alt="Natalia Teriakhina" />
         </div>
         <h3 class="founder-name">Natalia Teriakhina</h3>
         <p class="founder-subtitle">Top Executive at Enterprise · Ukrainian HR Leader</p>
@@ -1482,7 +1526,7 @@
 
     <div class="advisor-grid">
       <article class="advisor">
-        <div class="advisor-portrait"><img src="images/advisor-andreas.jpg" alt="Andreas Stavrou" /></div>
+        <div class="advisor-portrait"><img src="images/advisor-andreas.png" alt="Andreas Stavrou" /></div>
         <h3 class="advisor-name">Andreas Stavrou</h3>
         <p class="advisor-role">International Law &amp; Tax Partner — Cyprus</p>
         <ul class="advisor-list">
@@ -1495,7 +1539,7 @@
       </article>
 
       <article class="advisor">
-        <div class="advisor-portrait"><img src="images/advisor-andriy.jpg" alt="Andriy Natrus" /></div>
+        <div class="advisor-portrait"><img src="images/advisor-andriy.png" alt="Andriy Natrus" /></div>
         <h3 class="advisor-name">Andriy Natrus</h3>
         <p class="advisor-role">Corporate Governance &amp; M&amp;A Advisor</p>
         <ul class="advisor-list">
@@ -1507,7 +1551,7 @@
       </article>
 
       <article class="advisor">
-        <div class="advisor-portrait"><img src="images/advisor-olena.jpg" alt="Olena Tkachenko" /></div>
+        <div class="advisor-portrait"><img src="images/advisor-olena.png" alt="Olena Tkachenko" /></div>
         <h3 class="advisor-name">Olena Tkachenko</h3>
         <p class="advisor-role">Ukrainian Corporate Law &amp; Business Mediator</p>
         <ul class="advisor-list">
@@ -1622,10 +1666,6 @@
           <a href="mailto:hello@vien.capital" class="contact-link">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
             hello@vien.capital
-          </a>
-          <a href="#" class="contact-link">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
-            Book a 30-min intro call
           </a>
           <a href="https://www.linkedin.com/in/volodymyr-nerubenko/" target="_blank" rel="noopener" class="contact-link">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10v8M8 7v.01M12 18v-5a3 3 0 016 0v5"/></svg>
